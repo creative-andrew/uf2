@@ -1,12 +1,25 @@
 <div class="row">
   <div class="col-md-6 offset-md-3">
     <?php 
-      global $error;
-      if ($error) { ?>
+      if (isset($_SESSION['error-message'])) { ?>
         <div class="alert alert-danger" role="alert">
-          Incorrect Password or Username.
+          <?php 
+          echo $_SESSION['error-message'];
+          unset($_SESSION['error-message']);
+          ?>
         </div>
        <?php } ?>
+
+       <?php 
+      if (isset($_SESSION['success-message'])) { ?>
+        <div class="alert alert-success" role="alert">
+          <?php 
+          echo $_SESSION['success-message'];
+          unset($_SESSION['success-message']);
+          ?>
+        </div>
+       <?php } ?>
+  
     <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
       <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
       <div class="form-floating">
@@ -18,7 +31,8 @@
         <label for="floatingPassword">Password</label>
       </div>
 
-      <button class="w-100 btn btn-lg btn-primary" name='login' type="submit">Sign in</button>
+      <button class="w-100 btn btn-lg btn-primary mb-3" name='login' type="submit">Sign in</button>
+      <div>You don't have an account yet? <a href="./sign-up.php">Sign up</a></div>
     </form>
   </div>
 </div>

@@ -1,9 +1,28 @@
 <section class="container">
+<?php 
+      if (isset($_SESSION['error-message'])) { ?>
+        <div class="alert alert-danger" role="alert">
+          <?php 
+          echo $_SESSION['error-message'];
+          unset($_SESSION['error-message']);
+          ?>
+        </div>
+       <?php } ?>
+
+       <?php 
+      if (isset($_SESSION['success-message'])) { ?>
+        <div class="alert alert-success" role="alert">
+          <?php 
+          echo $_SESSION['success-message'];
+          unset($_SESSION['success-message']);
+          ?>
+        </div>
+       <?php } ?>
     <div class="row">
         <div class="col-md-6">
             <div class="row g-4">
-            <?php if ( isset($_SESSION['actividades']) ) {
-                $actividades = $_SESSION['actividades'];
+            <?php if ( AppController::getListaDeActividades() ) {
+                $actividades = AppController::getListaDeActividades();
                 foreach($actividades as $actividad) {
             ?>
             <div class="col-6">
@@ -13,7 +32,6 @@
                     alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title"><?php echo $actividad->getTitulo();?></h5>
-                    <p class="card-text">Tipo de Actividad: <?php echo $actividad->getTipoDeActividad();  ?></p>
                     <p class="card-text">Fecha: <?php echo $actividad->getFecha(); ?></p>
                     <p class="card-text">Ciudad: <?php echo $actividad->getCiudad(); ?></p>
                     <p class="card-text">Precio:

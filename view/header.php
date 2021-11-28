@@ -37,7 +37,7 @@ AppController::init();
         <div class="col-md-3 text-end">
 
             <?php if (isset($_COOKIE) && isset($_COOKIE['user'])) { ?>
-            <span style="padding-right: 10px;">Usuario: <?php echo $_COOKIE['user'];?></span>
+            <span style="padding-right: 10px;">Usuario: <?php echo AppController::getNombreDeUsuarioById()?></span>
             <a href="./logout.php" type="button" class="btn btn-primary">Logout</a>
             <?php }
         else { ?>
