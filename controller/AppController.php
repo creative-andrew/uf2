@@ -25,7 +25,6 @@ if( ! class_exists( 'AppController' ) ) :
 		}
 
 		public static function init() {
-	
 			if (!isset($_SESSION)) session_start();
 			if (isset($_POST['login'])) { 
 				self::verifyLogin($_POST['username'], $_POST['password']);
@@ -35,12 +34,13 @@ if( ! class_exists( 'AppController' ) ) :
 				self::crearActividad();
 			}
 			// No hay user y estamos en index.
-			if (!isset($_COOKIE['user']) && strpos($_SERVER['REQUEST_URI'], "/index.php") == true ) {
+			if (!isset($_COOKIE['user']) && strpos($_SERVER['REQUEST_URI'], "index.php") == true ) {
+				echo "true";
 				header("Location: ./login.php");
 				exit();
 			}
 			// No hay user y no estamos en login, para evitar un redirect infinito.
-			if (isset($_COOKIE['user']) && strpos($_SERVER['REQUEST_URI'], "/login.php") !== false) {
+			if (isset($_COOKIE['user']) && strpos($_SERVER['REQUEST_URI'], "login.php") !== false) {
 				
 				header("Location: ./index.php");
 				exit();
